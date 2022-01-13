@@ -392,6 +392,8 @@ async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	page.innerHTML = "";
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
+	var sectionsButton = document.getElementById("section-button")
+	body.removeChild(sectionsButton)
 	for (var i = empezar ; i <= terminar; i++) {
 	
 	try {
