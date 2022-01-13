@@ -24,11 +24,10 @@ img{
 	background: #fff;
 }
 .info{
-	min-height: 45vh;
-	max-height: max-content;
-	background: #fff;
-	border-bottom-right-radius: 30px;
-	border-bottom-left-radius: 30px;
+    max-height: max-content;
+    background: #fff;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
 .card-head{
 	height: 20vh;
@@ -83,16 +82,15 @@ img{
 /*LITTLE CARD*/
 
 .card-l{
-	min-height: fit-content;
-	min-width: 200px;
-	display: flex;
-	flex-direction: column;
-	max-width: 15%;
-	margin: 1%;
-	transition: 0.25s;
+    min-height: fit-content;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    transition: 0.25s;
 }
 .name-b-l{
-	font-size: 30px;
+	font-size: 160%;
 }
 .hp-l{
 	font-size: 26px;
@@ -125,9 +123,9 @@ img{
 }
 .name-l{
 	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+    width: 100%;
+    margin: auto;
+    flex-direction: column;
 }
 #container{
 	display: flex;
