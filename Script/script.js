@@ -390,6 +390,8 @@ function section8(){
 
 async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	page.innerHTML = "";
+	var body = document.getElementById("body")
+	body.appendChild(spinner)
 	for (var i = empezar ; i <= terminar; i++) {
 	
 	try {
@@ -418,6 +420,7 @@ async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 		console.log(error)
 	}
 }
+body.removeChild(spinner)
 }
 
 
@@ -463,6 +466,8 @@ typeContainer.addEventListener("mouseout", function yellowAlertQuit(){
 
 async function PokemonNameFiltrer(name, empezar, terminar){
 	page.innerHTML = "";
+	var body = document.getElementById("body")
+	body.appendChild(spinner)
 	for (var i = empezar ; i <= terminar; i++) {
 	
 	try {
@@ -492,6 +497,7 @@ async function PokemonNameFiltrer(name, empezar, terminar){
 		console.log(error)
 	}
 }
+body.removeChild(spinner)
 }
 
 
@@ -560,4 +566,4 @@ function resolveBug(){
 	})
 }
 
-// section1()
+section1()
