@@ -323,7 +323,7 @@ img{
 	margin-bottom: 10px;
 }
 .notFund{
-	background: Linear-gradient (to bottom, transparent, #444);
+	background: Linear-gradient(to bottom, transparent, #444);
 	color: #6a4f4f;
 	padding-bottom: 2%;
 }
