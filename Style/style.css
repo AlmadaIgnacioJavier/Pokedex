@@ -311,7 +311,6 @@ img{
 .type-1{
 	display: grid;
 	grid-template-columns: repeat(2, minmax(min-content,150px));
-	grid-auto-rows: 25px;
 }
 .type-2{
 	display: grid;
@@ -320,9 +319,11 @@ img{
 .type-item{
 	transform: scale(2);
 	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 .notFund{
-	background: Linear-gradient( to bottom, transparent, #444);
+	background: Linear-gradient (to bottom, transparent, #444);
 	color: #6a4f4f;
 	padding-bottom: 2%;
 }
