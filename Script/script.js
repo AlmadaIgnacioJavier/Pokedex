@@ -307,10 +307,9 @@ let button4 = document.querySelector(".button-4");
 let button5 = document.querySelector(".button-5");
 let button6 = document.querySelector(".button-6");
 let button7 = document.querySelector(".button-7");
-let button8 = document.querySelector(".button-8");
 
 const buttons = []
-buttons.push(button1, button2, button3, button4, button5, button6, button7, button8)
+buttons.push(button1, button2, button3, button4, button5, button6, button7)
 
 
 
@@ -370,15 +369,6 @@ function section7(){
 	})
 	button7.classList.add("active")	
 }
-function section8(){
-	page.innerHTML = "";
-	PokemonChico(701,800)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button8.classList.add("active")	
-}
-
 
 
 // FILTRER
