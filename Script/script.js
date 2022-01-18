@@ -371,19 +371,65 @@ function section7(){
 }
 
 
+
 // FILTRER
 
 // FOR TYPE
 
+function disabledON(){
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	
+	inputs.forEach(e=>{
+		e.disabled = true;
+	})
 
+	// INPUT TEXT STYLE
+	var inputName = document.getElementById("searchNameInput")
+
+	inputName.disabled = true;
+	inputName.style.background = "rgba(255, 255, 255, 0.5)"
+	inputName.style.border = "none"
+	inputName.style.padding = "3px"
+
+	// ALERT AND BACKGROUND
+
+	var typeContainer = document.getElementById("type-container")
+	typeContainer.classList.add("notFund")		
+}
+
+function disabledOFF(){
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	
+	inputs.forEach(e=>{
+		e.disabled = false;
+	})
+
+	// INPUT TEXT STYLE
+	var inputName = document.getElementById("searchNameInput")
+
+	inputName.disabled = false;
+	inputName.style.background = "rgba(255, 255, 255, 0.5)"
+	inputName.style.border = "none"
+	inputName.style.padding = "3px"
+
+	// ALERT AND BACKGROUND
+
+	var typeContainer = document.getElementById("type-container")
+	typeContainer.classList.remove("notFund")		
+}
 
 
 async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	page.innerHTML = "";
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
-	var sectionsButton = document.getElementById("section-button")
-	body.removeChild(sectionsButton)
+	if (validator === 1) {
+		var inputs = document.querySelectorAll(`input[name="select"]`)
+		inputs.forEach(e=>{
+			e.disabled = true;
+		})
+		inputName.disabled = true;
+	}	
 	for (var i = empezar ; i <= terminar; i++) {
 	
 	try {
@@ -413,45 +459,17 @@ async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	}
 }
 body.removeChild(spinner)
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	
+	inputs.forEach(e=>{
+		e.disabled = false;
+	})
+	var inputName = document.getElementById("searchNameInput")
+	inputName.disabled = false;
 }
 
 
 let validator = 0;
-
-async function changeFiltrer(){
-	checked = document.querySelectorAll(`input[name="select"]:checked`)
-	if (validator === 0) {
-		PokemonChicoFiltroNuevo(checked[0].value, 1, 800);
-		validator++;
-		var inputs = document.querySelectorAll(`input[name="select"]`)
-		inputs.forEach(e=>{
-			e.disabled = true;
-
-		// INPUT TEXT STYLE
-		var inputName = document.getElementById("searchNameInput")
-
-		inputName.disabled = true;
-		inputName.style.background = "rgba(255, 255, 255, 0.5)"
-		inputName.style.border = "none"
-		inputName.style.padding = "3px"		
-	})
-	var typeContainer = document.getElementById("type-container")
-	typeContainer.classList.add("notFund")
-	var alert = document.getElementById("alert-message")
-	alert.style.display = "block"
-}}
-
-var typeContainer = document.getElementById("type-container")
-
-typeContainer.addEventListener("mouseover", function yellowAlert(){
-	var alert = document.querySelector(".alert-message")
-	alert.style.color = "yellow";
-})
-
-typeContainer.addEventListener("mouseout", function yellowAlertQuit(){
-	var alert = document.querySelector(".alert-message")
-	alert.style.color = "#ff4646";
-})
 
 
 // FOR NAME
@@ -460,6 +478,22 @@ async function PokemonNameFiltrer(name, empezar, terminar){
 	page.innerHTML = "";
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	inputs.forEach(e=>{
+		e.disabled = true;
+	})
+
+	// INPUT TEXT STYLE
+	var inputName = document.getElementById("searchNameInput")
+
+	inputName.disabled = true;
+	inputName.classList.add("inputAfterSearch")
+	inputName.classList.remove("inputBeforeSearch")
+
+	// ALERT AND BACKGROUND
+
+	var typeContainer = document.getElementById("type-container")
+	typeContainer.classList.add("notFund")	
 	for (var i = empezar ; i <= terminar; i++) {
 	
 	try {
@@ -490,6 +524,21 @@ async function PokemonNameFiltrer(name, empezar, terminar){
 	}
 }
 body.removeChild(spinner)
+
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	
+	inputs.forEach(e=>{
+		e.disabled = false;
+	})
+	var inputName = document.getElementById("searchNameInput")
+	inputName.disabled = false;	
+	var results = page.children.length
+	if (results === 0) {
+		page.innerHTML = `	
+		<section class="no-results">
+			<h1 class="text-center m-auto">No results found</h1>
+			</section>`
+	}
 }
 
 
@@ -506,46 +555,28 @@ function displayNone(){
 }
 	
 inputTypeContainer.addEventListener("change", function prueba123(){
-	var inputName = document.getElementById("searchNameInput")
-	
-	// VALIDATIONS
-	var pattern = new RegExp('^[A-Z]+$', 'i')
-	nameValidator2 = (wordCounter(inputName.value) < 4)
-	nameValidator3 = pattern.exec(inputName.value)
+		var inputName = document.getElementById("searchNameInput")
+		
+		// VALIDATIONS
+		var pattern = new RegExp('^[A-Z]+$', 'i')
+		nameValidator2 = (wordCounter(inputName.value) < 4)
+		nameValidator3 = pattern.exec(inputName.value)
 
 	if (nameValidator2 === false && nameValidator3 != null) {
 		PokemonNameFiltrer(inputName.value, 1, 700)
-		var inputs = document.querySelectorAll(`input[name="select"]`)
-		inputs.forEach(e=>{
-			e.disabled = true;
-		})
-
-		// INPUT TEXT STYLE
-		var inputName = document.getElementById("searchNameInput")
-
-		inputName.disabled = true;
-		inputName.style.background = "rgba(255, 255, 255, 0.5)"
-		inputName.style.border = "none"
-		inputName.style.padding = "3px"
-
-		// ALERT AND BACKGROUND
-
-		var typeContainer = document.getElementById("type-container")
-		typeContainer.classList.add("notFund")
-		var alert = document.getElementById("alert-message")
-		alert.style.display = "block"
 	} else if(nameValidator2 === true){
-		var containerElement = document.querySelector(".search-name-container")
-		var boxAlert = document.createElement("DIV")
-		boxAlert.classList.add("alt-message-box")
-		boxAlert.innerHTML = `<h4 class="alt-text">The search must have at least 4 characters"</h4>`
-		containerElement.appendChild(boxAlert)
+			var containerElement = document.querySelector(".search-name-container")
+			var boxAlert = document.createElement("DIV")
+			boxAlert.classList.add("alt-message-box")
+			boxAlert.innerHTML = `<h4 class="alt-text">The search must have at least 4 characters"</h4>`
+			containerElement.appendChild(boxAlert)
+
 	} else if(nameValidator3 === null){
-		var containerElement = document.querySelector(".search-name-container")
-		var boxAlert = document.createElement("DIV")
-		boxAlert.classList.add("alt-message-box")
-		boxAlert.innerHTML = `<h4 class="alt-text">Enter only letters to search please</h4>`
-		containerElement.appendChild(boxAlert)
+			var containerElement = document.querySelector(".search-name-container")
+			var boxAlert = document.createElement("DIV")
+			boxAlert.classList.add("alt-message-box")
+			boxAlert.innerHTML = `<h4 class="alt-text">Enter only letters to search please</h4>`
+			containerElement.appendChild(boxAlert)
 	}
 })
 
@@ -557,5 +588,26 @@ function resolveBug(){
 		container.removeChild(e)
 	})
 }
+
+let pruebaEvent = document.querySelectorAll(".type-item")
+pruebaEvent.forEach(e=>{
+		e.addEventListener("click", function event(){
+				PokemonChicoFiltroNuevo(this.value, 1, 800);
+				validator++;
+				var inputs = document.querySelectorAll(`input[name="select"]`)
+				inputs.forEach(e=>{
+					e.disabled = true;	
+			})
+			// INPUT TEXT STYLE
+			var inputName = document.getElementById("searchNameInput")
+
+			inputName.disabled = true;
+			inputName.classList.add("inputAfterSearch")
+			inputName.classList.remove("inputBeforeSearch")			
+			var typeContainer = document.getElementById("type-container")
+			typeContainer.classList.add("notFund")
+	})
+})
+
 
 section1()
