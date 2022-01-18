@@ -376,49 +376,6 @@ function section7(){
 
 // FOR TYPE
 
-function disabledON(){
-	var inputs = document.querySelectorAll(`input[name="select"]`)
-	
-	inputs.forEach(e=>{
-		e.disabled = true;
-	})
-
-	// INPUT TEXT STYLE
-	var inputName = document.getElementById("searchNameInput")
-
-	inputName.disabled = true;
-	inputName.style.background = "rgba(255, 255, 255, 0.5)"
-	inputName.style.border = "none"
-	inputName.style.padding = "3px"
-
-	// ALERT AND BACKGROUND
-
-	var typeContainer = document.getElementById("type-container")
-	typeContainer.classList.add("notFund")		
-}
-
-function disabledOFF(){
-	var inputs = document.querySelectorAll(`input[name="select"]`)
-	
-	inputs.forEach(e=>{
-		e.disabled = false;
-	})
-
-	// INPUT TEXT STYLE
-	var inputName = document.getElementById("searchNameInput")
-
-	inputName.disabled = false;
-	inputName.style.background = "rgba(255, 255, 255, 0.5)"
-	inputName.style.border = "none"
-	inputName.style.padding = "3px"
-
-	// ALERT AND BACKGROUND
-
-	var typeContainer = document.getElementById("type-container")
-	typeContainer.classList.remove("notFund")		
-}
-
-
 async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	page.innerHTML = "";
 	var body = document.getElementById("body")
