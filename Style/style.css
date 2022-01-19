@@ -500,6 +500,52 @@ img{
   animation-iteration-count: infinite;
   stroke: #ee0b0b !important;
 }
+/*BIG CARD*/
+
+.img-big{
+	height: 20vh;
+	width: 20vh;
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	margin-top: -10vh;
+	border: 3px solid #fff;
+	outline: none;
+	background: #fff;
+}
+.name-big{
+	text-align: center;
+	display: flex;
+	margin: auto;
+	flex-direction: column;
+	justify-content: center;
+}
+
+@media screen and (min-height: 0) and (max-height: 460px){
+.img-big{
+    height: 30vh;
+    width: 30vh;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    margin-top: -10vh;
+    border: 3px solid #fff;
+    outline: none;
+    background: #fff;
+}
+.name-big{
+	text-align: center;
+   display: flex;
+   margin: auto;
+   flex-direction: row;
+   justify-content: space-around;
+}
+.card-complete{
+	width: 100% !important;
+}
+.item-box-container{
+	margin-top: 0;
+}
 }
 @media screen and (min-width: 619px) and (max-width: 1036px) {
 	.nav{
