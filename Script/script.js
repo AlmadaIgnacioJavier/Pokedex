@@ -51,8 +51,8 @@ const printBigCard = (pokemon) =>{
 			<article class="card-head">
 			</article>
 			<article class="info">
-				<img src="${pokemon.img}">
-				<p class="name"><b class="name-b">${pokemon.name}</b> <span class="hp">${pokemon.hp} Hp</span> </p>
+				<img class="img-big" src="${pokemon.img}">
+				<p class="name-big"><b class="name-b">${pokemon.name}</b> <span class="hp">${pokemon.hp} Hp</span> </p>
 				<h2 id="type" class="type">${pokemon.type}</h2>
 				<div class="item-box-container">				
 					<div class="item-container">
