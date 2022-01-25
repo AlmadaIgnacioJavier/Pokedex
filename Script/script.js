@@ -205,8 +205,9 @@ observer.observe(contenedor.lastChild)
 }
 
 function MorePokemons(e) {
-	var finish = (parseInt(e) + 20) 
-	PokemonChico(e, finish)
+	var numberNext = (parseInt(e) + 1)
+	var finish = (numberNext + 20) 
+	PokemonChico(numberNext, finish)
 }
 
 
