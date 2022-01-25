@@ -1,6 +1,5 @@
 let page = document.getElementById("container");
 let body = document.getElementById("body");
-let sectionButton = document.getElementById("section-button");
 const spinner = document.createElement("DIV")
 spinner.innerHTML = `<div id="container-spin">
   <svg viewBox="0 0 100 100">
@@ -40,7 +39,6 @@ async function PokemonGrande(id){
 
 const printBigCard = (pokemon) =>{
 	var page = document.getElementById("container")
-	var sectionButton = document.getElementById("section-button");
 	var BigCard = document.getElementById("big-card");
 	BigCard.innerHTML += 	 `
 	<section id="containerBigCard" onclick="exit()">
@@ -179,14 +177,39 @@ async function PokemonChico(empezar, terminar){
 	catch (error){
 		console.log(error)
 	}
-	
 };
 inputs.forEach(e=>{
 	e.disabled = false;
 })
 inputName.disabled = false;
 body.removeChild(spinner)
+var contenedor = document.querySelector("#container");
+console.log(contenedor.lastChild.children[0].value)
+	console.log(contenedor.children)
+verifyVisibility = (entries, entry) => {
+		if ((entries[0] != undefined) && entries[0].isIntersecting === true) {
+			var array = [];
+			for (var i = 1 ; i <= 35 ; i++) {
+				array.push(20*i)
+			}
+			
+			var number = (entries[0].target.firstElementChild.attributes[1].value)
+			console.log(array.includes(contenedor.children.length))
+			MorePokemons(number)
+		}
 }
+let observer = new IntersectionObserver(verifyVisibility);
+verifyVisibility(contenedor.lastChild)
+observer.observe(contenedor.lastChild)
+
+}
+
+function MorePokemons(e) {
+	var finish = (parseInt(e) + 20) 
+	PokemonChico(e, finish)
+}
+
+
 class pokeItem{
 	constructor(element,id){
 		this.element = element;
@@ -292,93 +315,32 @@ function seeMore(id){
 function exit(){
 	var BigCard = document.getElementById("big-card");
 	BigCard.removeChild(document.getElementById("containerBigCard"));
-	var sectionButton = document.getElementById("section-button");
-	sectionButton.style.display = "block"
 	page.style.display = "flex"
 
 }
 
 // SECTIONS
 
-let button1 = document.querySelector(".button-1");
-let button2 = document.querySelector(".button-2");
-let button3 = document.querySelector(".button-3");
-let button4 = document.querySelector(".button-4");
-let button5 = document.querySelector(".button-5");
-let button6 = document.querySelector(".button-6");
-let button7 = document.querySelector(".button-7");
-
-const buttons = []
-buttons.push(button1, button2, button3, button4, button5, button6, button7)
-
 
 
 function section1(){
 	page.innerHTML = "";
-	PokemonChico(1,100)
+	PokemonChico(1,20)
 	buttons.forEach(e=>{
 		e.classList.remove("active")
 	})
 	button1.classList.add("active")
 }
-function section2(){
-	page.innerHTML = "";
-	PokemonChico(101,200)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button2.classList.add("active")
-}
-function section3(){
-	page.innerHTML = "";
-	PokemonChico(201,300)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button3.classList.add("active")
-}
-function section4(){
-	page.innerHTML = "";
-	PokemonChico(301,400)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button4.classList.add("active")	
-}
-function section5(){
-	page.innerHTML = "";
-	PokemonChico(401,500)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button5.classList.add("active")	
-}
-function section6(){
-	page.innerHTML = "";
-	PokemonChico(501,600)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button6.classList.add("active")	
-}
-function section7(){
-	page.innerHTML = "";
-	PokemonChico(601,700)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button7.classList.add("active")	
-}
+
 
 // FILTRER
 
 // FOR TYPE
 
 async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
-	page.innerHTML = "";
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
-	for (var i = empezar ; i <= terminar; i++) {
+	for (var i = empezar ; i <= 700; i++) {
 	
 	try {
 
@@ -400,7 +362,13 @@ async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 			if (pokemon.type === filtro && pokemon.img != null) {
 				printLittleCard(pokemon)
 			} 
-			
+			var contenedor = document.querySelector("#container")
+			console.log(contenedor.children.length)
+
+			if (contenedor.children.length >= terminar ) {
+				break;
+			}
+			console.log(terminar)
 	}
 	catch (error){
 		console.log(error)
@@ -414,13 +382,62 @@ body.removeChild(spinner)
 	})
 	var inputName = document.getElementById("searchNameInput")
 	inputName.disabled = false;
+	var contenedor = document.querySelector("#container");
+	console.log(contenedor.children)
+	verifyVisibility = (entries, entry) => {
+		if ((entries[0] != undefined) && entries[0].isIntersecting === true) {
+
+			var contenedor = document.querySelector("#container");
+			var number = (entries[0].target.firstElementChild.attributes[1].value)
+			var array = [];
+			for (var i = 1 ; i <= 35 ; i++) {
+				array.push(20*i)
+			}
+
+			if (array.includes(contenedor.children.length) && verificatorFunction(parseInt(number))) {
+				numberNext = (parseInt(number) + 1)
+				MorePokemonsFiltrer(numberNext, filtro)
+			}
+		}
+	}
+	let observer = new IntersectionObserver(verifyVisibility);
+	verifyVisibility(contenedor.lastChild)
+	observer.observe(contenedor.lastChild)
+
 }
+function MorePokemonsFiltrer(e, filtrer) {
+	var container = document.getElementById("container")
+	var finish = (container.children.length + 20) 
+	PokemonChicoFiltroNuevo(filtrer,e,finish)
+}
+
+var verificator = []
+ 
+
+function verificatorFunction(e){
+	if (e === "clean"){
+		verificator.length = 0;
+		secondValidator = false
+	} else{
+
+		var validator = verificator.includes(e)
+		if (validator === false) {
+			verificator.push(e)
+			secondValidator = true
+		} else{
+			secondValidator = false
+		}
+		console.log(verificator)
+
+	}
+	return secondValidator
+}
+
 
 
 // FOR NAME
 
 async function PokemonNameFiltrer(name, empezar, terminar){
-	page.innerHTML = "";
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
 	var inputs = document.querySelectorAll(`input[name="select"]`)
@@ -537,7 +554,9 @@ function resolveBug(){
 let pruebaEvent = document.querySelectorAll(".type-item")
 pruebaEvent.forEach(e=>{
 		e.addEventListener("click", function event(){
-				PokemonChicoFiltroNuevo(this.value, 1, 800);
+				page.innerHTML = "";
+				verificatorFunction("clean")
+				PokemonChicoFiltroNuevo(this.value, 1, 20);
 				var inputs = document.querySelectorAll(`input[name="select"]`)
 				if (inputs != undefined) {
 					inputs.forEach(e=>{
