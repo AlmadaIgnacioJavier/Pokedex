@@ -1,6 +1,5 @@
 let page = document.getElementById("container");
 let body = document.getElementById("body");
-let sectionButton = document.getElementById("section-button");
 const spinner = document.createElement("DIV")
 spinner.innerHTML = `<div id="container-spin">
   <svg viewBox="0 0 100 100">
@@ -40,7 +39,6 @@ async function PokemonGrande(id){
 
 const printBigCard = (pokemon) =>{
 	var page = document.getElementById("container")
-	var sectionButton = document.getElementById("section-button");
 	var BigCard = document.getElementById("big-card");
 	BigCard.innerHTML += 	 `
 	<section id="containerBigCard" onclick="exit()">
@@ -51,8 +49,8 @@ const printBigCard = (pokemon) =>{
 			<article class="card-head">
 			</article>
 			<article class="info">
-				<img src="${pokemon.img}">
-				<p class="name"><b class="name-b">${pokemon.name}</b> <span class="hp">${pokemon.hp} Hp</span> </p>
+				<img class="img-big" src="${pokemon.img}">
+				<p class="name-big"><b class="name-b">${pokemon.name}</b> <span class="hp">${pokemon.hp} Hp</span> </p>
 				<h2 id="type" class="type">${pokemon.type}</h2>
 				<div class="item-box-container">				
 					<div class="item-container">
@@ -179,14 +177,40 @@ async function PokemonChico(empezar, terminar){
 	catch (error){
 		console.log(error)
 	}
-	
 };
 inputs.forEach(e=>{
 	e.disabled = false;
 })
 inputName.disabled = false;
 body.removeChild(spinner)
+var contenedor = document.querySelector("#container");
+console.log(contenedor.lastChild.children[0].value)
+	console.log(contenedor.children)
+verifyVisibility = (entries, entry) => {
+		if ((entries[0] != undefined) && entries[0].isIntersecting === true) {
+			var array = [];
+			for (var i = 1 ; i <= 35 ; i++) {
+				array.push(20*i)
+			}
+			
+			var number = (entries[0].target.firstElementChild.attributes[1].value)
+			console.log(array.includes(contenedor.children.length))
+			MorePokemons(number)
+		}
 }
+let observer = new IntersectionObserver(verifyVisibility);
+verifyVisibility(contenedor.lastChild)
+observer.observe(contenedor.lastChild)
+
+}
+
+function MorePokemons(e) {
+	var numberNext = (parseInt(e) + 1)
+	var finish = (numberNext + 20) 
+	PokemonChico(numberNext, finish)
+}
+
+
 class pokeItem{
 	constructor(element,id){
 		this.element = element;
@@ -292,109 +316,32 @@ function seeMore(id){
 function exit(){
 	var BigCard = document.getElementById("big-card");
 	BigCard.removeChild(document.getElementById("containerBigCard"));
-	var sectionButton = document.getElementById("section-button");
-	sectionButton.style.display = "block"
 	page.style.display = "flex"
 
 }
 
 // SECTIONS
 
-let button1 = document.querySelector(".button-1");
-let button2 = document.querySelector(".button-2");
-let button3 = document.querySelector(".button-3");
-let button4 = document.querySelector(".button-4");
-let button5 = document.querySelector(".button-5");
-let button6 = document.querySelector(".button-6");
-let button7 = document.querySelector(".button-7");
-let button8 = document.querySelector(".button-8");
-
-const buttons = []
-buttons.push(button1, button2, button3, button4, button5, button6, button7, button8)
-
 
 
 function section1(){
 	page.innerHTML = "";
-	PokemonChico(1,100)
+	PokemonChico(1,20)
 	buttons.forEach(e=>{
 		e.classList.remove("active")
 	})
 	button1.classList.add("active")
 }
-function section2(){
-	page.innerHTML = "";
-	PokemonChico(101,200)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button2.classList.add("active")
-}
-function section3(){
-	page.innerHTML = "";
-	PokemonChico(201,300)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button3.classList.add("active")
-}
-function section4(){
-	page.innerHTML = "";
-	PokemonChico(301,400)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button4.classList.add("active")	
-}
-function section5(){
-	page.innerHTML = "";
-	PokemonChico(401,500)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button5.classList.add("active")	
-}
-function section6(){
-	page.innerHTML = "";
-	PokemonChico(501,600)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button6.classList.add("active")	
-}
-function section7(){
-	page.innerHTML = "";
-	PokemonChico(601,700)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button7.classList.add("active")	
-}
-function section8(){
-	page.innerHTML = "";
-	PokemonChico(701,800)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button8.classList.add("active")	
-}
-
 
 
 // FILTRER
 
 // FOR TYPE
 
-
-
-
 async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
-	page.innerHTML = "";
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
-	var sectionsButton = document.getElementById("section-button")
-	body.removeChild(sectionsButton)
-	for (var i = empezar ; i <= terminar; i++) {
+	for (var i = empezar ; i <= 700; i++) {
 	
 	try {
 
@@ -416,60 +363,100 @@ async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 			if (pokemon.type === filtro && pokemon.img != null) {
 				printLittleCard(pokemon)
 			} 
-			
+			var contenedor = document.querySelector("#container")
+			console.log(contenedor.children.length)
+
+			if (contenedor.children.length >= terminar ) {
+				break;
+			}
+			console.log(terminar)
 	}
 	catch (error){
 		console.log(error)
 	}
 }
 body.removeChild(spinner)
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	
+	inputs.forEach(e=>{
+		e.disabled = false;
+	})
+	var inputName = document.getElementById("searchNameInput")
+	inputName.disabled = false;
+	var contenedor = document.querySelector("#container");
+	console.log(contenedor.children)
+	verifyVisibility = (entries, entry) => {
+		if ((entries[0] != undefined) && entries[0].isIntersecting === true) {
+
+			var contenedor = document.querySelector("#container");
+			var number = (entries[0].target.firstElementChild.attributes[1].value)
+			var array = [];
+			for (var i = 1 ; i <= 35 ; i++) {
+				array.push(20*i)
+			}
+
+			if (array.includes(contenedor.children.length) && verificatorFunction(parseInt(number))) {
+				numberNext = (parseInt(number) + 1)
+				MorePokemonsFiltrer(numberNext, filtro)
+			}
+		}
+	}
+	let observer = new IntersectionObserver(verifyVisibility);
+	verifyVisibility(contenedor.lastChild)
+	observer.observe(contenedor.lastChild)
+
+}
+function MorePokemonsFiltrer(e, filtrer) {
+	var container = document.getElementById("container")
+	var finish = (container.children.length + 20) 
+	PokemonChicoFiltroNuevo(filtrer,e,finish)
 }
 
+var verificator = []
+ 
 
-let validator = 0;
+function verificatorFunction(e){
+	if (e === "clean"){
+		verificator.length = 0;
+		secondValidator = false
+	} else{
 
-async function changeFiltrer(){
-	checked = document.querySelectorAll(`input[name="select"]:checked`)
-	if (validator === 0) {
-		PokemonChicoFiltroNuevo(checked[0].value, 1, 800);
-		validator++;
-		var inputs = document.querySelectorAll(`input[name="select"]`)
-		inputs.forEach(e=>{
-			e.disabled = true;
+		var validator = verificator.includes(e)
+		if (validator === false) {
+			verificator.push(e)
+			secondValidator = true
+		} else{
+			secondValidator = false
+		}
+		console.log(verificator)
 
-		// INPUT TEXT STYLE
-		var inputName = document.getElementById("searchNameInput")
+	}
+	return secondValidator
+}
 
-		inputName.disabled = true;
-		inputName.style.background = "rgba(255, 255, 255, 0.5)"
-		inputName.style.border = "none"
-		inputName.style.padding = "3px"		
-	})
-	var typeContainer = document.getElementById("type-container")
-	typeContainer.classList.add("notFund")
-	var alert = document.getElementById("alert-message")
-	alert.style.display = "block"
-}}
-
-var typeContainer = document.getElementById("type-container")
-
-typeContainer.addEventListener("mouseover", function yellowAlert(){
-	var alert = document.querySelector(".alert-message")
-	alert.style.color = "yellow";
-})
-
-typeContainer.addEventListener("mouseout", function yellowAlertQuit(){
-	var alert = document.querySelector(".alert-message")
-	alert.style.color = "#ff4646";
-})
 
 
 // FOR NAME
 
 async function PokemonNameFiltrer(name, empezar, terminar){
-	page.innerHTML = "";
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	inputs.forEach(e=>{
+		e.disabled = true;
+	})
+
+	// INPUT TEXT STYLE
+	var inputName = document.getElementById("searchNameInput")
+
+	inputName.disabled = true;
+	inputName.classList.add("inputAfterSearch")
+	inputName.classList.remove("inputBeforeSearch")
+
+	// ALERT AND BACKGROUND
+
+	var typeContainer = document.getElementById("type-container")
+	typeContainer.classList.add("notFund")	
 	for (var i = empezar ; i <= terminar; i++) {
 	
 	try {
@@ -500,6 +487,21 @@ async function PokemonNameFiltrer(name, empezar, terminar){
 	}
 }
 body.removeChild(spinner)
+
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	
+	inputs.forEach(e=>{
+		e.disabled = false;
+	})
+	var inputName = document.getElementById("searchNameInput")
+	inputName.disabled = false;	
+	var results = page.children.length
+	if (results === 0) {
+		page.innerHTML = `	
+		<section class="no-results">
+			<h1 class="text-center m-auto">No results found</h1>
+			</section>`
+	}
 }
 
 
@@ -516,46 +518,28 @@ function displayNone(){
 }
 	
 inputTypeContainer.addEventListener("change", function prueba123(){
-	var inputName = document.getElementById("searchNameInput")
-	
-	// VALIDATIONS
-	var pattern = new RegExp('^[A-Z]+$', 'i')
-	nameValidator2 = (wordCounter(inputName.value) < 4)
-	nameValidator3 = pattern.exec(inputName.value)
+		var inputName = document.getElementById("searchNameInput")
+		
+		// VALIDATIONS
+		var pattern = new RegExp('^[A-Z]+$', 'i')
+		nameValidator2 = (wordCounter(inputName.value) < 4)
+		nameValidator3 = pattern.exec(inputName.value)
 
 	if (nameValidator2 === false && nameValidator3 != null) {
 		PokemonNameFiltrer(inputName.value, 1, 700)
-		var inputs = document.querySelectorAll(`input[name="select"]`)
-		inputs.forEach(e=>{
-			e.disabled = true;
-		})
-
-		// INPUT TEXT STYLE
-		var inputName = document.getElementById("searchNameInput")
-
-		inputName.disabled = true;
-		inputName.style.background = "rgba(255, 255, 255, 0.5)"
-		inputName.style.border = "none"
-		inputName.style.padding = "3px"
-
-		// ALERT AND BACKGROUND
-
-		var typeContainer = document.getElementById("type-container")
-		typeContainer.classList.add("notFund")
-		var alert = document.getElementById("alert-message")
-		alert.style.display = "block"
 	} else if(nameValidator2 === true){
-		var containerElement = document.querySelector(".search-name-container")
-		var boxAlert = document.createElement("DIV")
-		boxAlert.classList.add("alt-message-box")
-		boxAlert.innerHTML = `<h4 class="alt-text">The search must have at least 4 characters"</h4>`
-		containerElement.appendChild(boxAlert)
+			var containerElement = document.querySelector(".search-name-container")
+			var boxAlert = document.createElement("DIV")
+			boxAlert.classList.add("alt-message-box")
+			boxAlert.innerHTML = `<h4 class="alt-text">The search must have at least 4 characters"</h4>`
+			containerElement.appendChild(boxAlert)
+
 	} else if(nameValidator3 === null){
-		var containerElement = document.querySelector(".search-name-container")
-		var boxAlert = document.createElement("DIV")
-		boxAlert.classList.add("alt-message-box")
-		boxAlert.innerHTML = `<h4 class="alt-text">Enter only letters to search please</h4>`
-		containerElement.appendChild(boxAlert)
+			var containerElement = document.querySelector(".search-name-container")
+			var boxAlert = document.createElement("DIV")
+			boxAlert.classList.add("alt-message-box")
+			boxAlert.innerHTML = `<h4 class="alt-text">Enter only letters to search please</h4>`
+			containerElement.appendChild(boxAlert)
 	}
 })
 
@@ -567,5 +551,32 @@ function resolveBug(){
 		container.removeChild(e)
 	})
 }
+
+let pruebaEvent = document.querySelectorAll(".type-item")
+pruebaEvent.forEach(e=>{
+		e.addEventListener("click", function event(){
+				page.innerHTML = "";
+				verificatorFunction("clean")
+				PokemonChicoFiltroNuevo(this.value, 1, 20);
+				var inputs = document.querySelectorAll(`input[name="select"]`)
+				if (inputs != undefined) {
+					inputs.forEach(e=>{
+						e.disabled = true;	
+					})
+				}
+				// INPUT TEXT STYLE
+				var inputName = document.getElementById("searchNameInput")
+				if (inputName != undefined){
+					inputName.disabled = true;
+					inputName.classList.add("inputAfterSearch")
+					inputName.classList.remove("inputBeforeSearch")			
+				}
+				var typeContainer = document.getElementById("type-container")
+				if(typeContainer != undefined){
+					typeContainer.classList.add("notFund")
+				}
+	})
+})
+
 
 section1()
