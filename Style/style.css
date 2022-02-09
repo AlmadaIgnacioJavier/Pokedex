@@ -86,8 +86,8 @@ img{
     min-width: 200px;
     display: flex;
     flex-direction: column;
-    margin: 1%;
-    transition: 0.25s;
+    margin: 2%;
+    transition: 0.1s;
 }
 .name-b-l{
 	font-size: 160%;
@@ -148,7 +148,7 @@ img{
 }
 .card-l:hover{
 	min-width: 230px;
-	transition: 0.25s;
+	transition: 0.1s;
 }
 .hp-l{
 	font-size: 26px;
@@ -276,7 +276,7 @@ img{
     color: yellow !important;
     width: fit-content !important;
     margin: auto;
-    background: transparent !important
+    background: transparent !important;
 }
 .filtrer-tittle:focus{
 	border: none !important;
@@ -323,9 +323,11 @@ img{
 	margin-bottom: 10px;
 }
 .notFund{
-	background: Linear-gradient (to bottom, transparent, #444);
+	background: Linear-gradient(to bottom, transparent, #444);
 	color: #6a4f4f;
 	padding-bottom: 2%;
+	border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 #alert-message{
 	animation-name: alertAparecer;
@@ -335,6 +337,27 @@ img{
 	border-bottom-right-radius: 30px;
 	border-bottom-left-radius: 30px;
 
+}
+.no-results{
+    background: rgba(250,250,250,0.7);
+    margin: auto;
+    width: 35%;
+    font-size: 3em;
+    border-radius: 50px;
+    margin-top: 3%;
+    height: 150px;
+    text-align: center;
+    display: flex;
+    font-weight: bolder;
+    margin-bottom: 3%;
+    animation-name: aparece;
+    animation-duration: 0.5s;
+    transition: background 0.3s;
+    animation-timing-function: ease-out;
+}
+.no-results:hover{
+	background: rgba(250,250,250,1);
+	transition: 0.3s;
 }
 @keyframes alertAparecer{
 	0%{
@@ -367,15 +390,33 @@ img{
 	font-family: filtrerFont;
 }
 
-#searchNameInput{
+.inputBeforeSearch{
 	text-align: center;
 	background: lightblue;
 	font-weight: bold;
 	border: none;
 }
-#searchNameInput:focus{
+.inputBeforeSearch:focus{
 	border: none;
 	outline: none;
+}
+.inputAfterSearch{
+	text-align: center;
+	font-weight: bold;
+	border: none;	
+	background: rgba(255, 255, 255, 0.5);
+  padding: 3px;
+  transition: 0.3s;
+}
+.inputAfterSearch:hover{
+	background: rgba(200, 200, 200, 1);
+	transition: 0.2s;
+}
+.inputAfterSearch:focus{
+	background: rgba(200, 200, 200, 1);
+	border: none;
+	outline: none;	
+	transition: 0.2s;
 }
 .search-name-container{
 	background: transparent;
@@ -390,6 +431,17 @@ img{
 	}
 	100%{
 		opacity: 0;
+	}
+}
+@keyframes aparece{
+	0%{
+		opacity: 0;
+	}
+	50%{
+		opacity: 0.3;
+	}
+	100%{
+		opacity: 0.7;
 	}
 }
 .alt-message-box{
@@ -448,6 +500,54 @@ img{
   animation-iteration-count: infinite;
   stroke: #ee0b0b !important;
 }
+/*BIG CARD*/
+
+.img-big{
+	height: 20vh;
+	width: 20vh;
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	margin-top: -10vh;
+	border: 3px solid #fff;
+	outline: none;
+	background: #fff;
+}
+.name-big{
+	text-align: center;
+	display: flex;
+	margin: auto;
+	flex-direction: column;
+	justify-content: center;
+}
+
+@media screen and (min-height: 0) and (max-height: 460px){
+.img-big{
+    height: 30vh;
+    width: 30vh;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    margin-top: -10vh;
+    border: 3px solid #fff;
+    outline: none;
+    background: #fff;
+}
+.name-big{
+	text-align: center;
+   display: flex;
+   margin: auto;
+   flex-direction: row;
+   justify-content: space-around;
+   margin-top: -6% !important;
+}
+.card-complete{
+	width: 100% !important;
+}
+.item-box-container{
+	margin-top: 0;
+}
+}
 @media screen and (min-width: 619px) and (max-width: 1036px) {
 	.nav{
 		border-top-left-radius: 0px;
@@ -472,6 +572,9 @@ img{
 	#spinner{
 		top:35%;
 	}
+	.no-results{
+		width: 50%;
+	}
  }
 @media screen and (min-width: 0px) and (max-width: 619px) {
 	.nav-image{
@@ -494,5 +597,7 @@ img{
 		width: 80%;
 		z-index: 1000;
 	}
+	.no-results{
+		width: 80%;
+	}
 }
-
