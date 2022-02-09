@@ -328,6 +328,12 @@ function section1(){
 async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
+	var inputs = document.querySelectorAll(`input[name="select"]`)
+	inputs.forEach(e=>{
+		e.disabled = true;
+	})
+	var inputSearchName = document.getElementById("searchNameInput")
+	inputSearchName.disabled = true
 	for (var i = empezar ; i <= 700; i++) {
 	
 	try {
@@ -366,6 +372,7 @@ body.removeChild(spinner)
 	inputs.forEach(e=>{
 		e.disabled = false;
 	})
+inputSearchName.disabled = false
 	var inputName = document.getElementById("searchNameInput")
 	inputName.disabled = false;
 	var contenedor = document.querySelector("#container");
@@ -483,7 +490,7 @@ body.removeChild(spinner)
 		page.innerHTML = `	
 		<section class="no-results">
 			<h1 class="text-center m-auto">No results found</h1>
-			</section>`
+		</section>`
 	}
 }
 
