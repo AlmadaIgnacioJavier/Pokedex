@@ -178,10 +178,13 @@ async function PokemonChico(empezar, terminar){
 		console.log(error)
 	}
 };
+
 inputs.forEach(e=>{
 	e.disabled = false;
 })
+
 inputName.disabled = false;
+
 body.removeChild(spinner)
 var contenedor = document.querySelector("#container");
 verifyVisibility = (entries, entry) => {
@@ -328,12 +331,15 @@ function section1(){
 async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	var body = document.getElementById("body")
 	body.appendChild(spinner)
+
 	var inputs = document.querySelectorAll(`input[name="select"]`)
 	inputs.forEach(e=>{
 		e.disabled = true;
 	})
+
 	var inputSearchName = document.getElementById("searchNameInput")
 	inputSearchName.disabled = true
+
 	for (var i = empezar ; i <= 700; i++) {
 	
 	try {
@@ -367,11 +373,13 @@ async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 	}
 }
 body.removeChild(spinner)
-	var inputs = document.querySelectorAll(`input[name="select"]`)
+
+
 	
-	inputs.forEach(e=>{
+inputs.forEach(e=>{
 		e.disabled = false;
-	})
+})
+
 inputSearchName.disabled = false
 	var inputName = document.getElementById("searchNameInput")
 	inputName.disabled = false;
