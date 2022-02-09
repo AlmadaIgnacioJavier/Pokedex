@@ -184,8 +184,6 @@ inputs.forEach(e=>{
 inputName.disabled = false;
 body.removeChild(spinner)
 var contenedor = document.querySelector("#container");
-console.log(contenedor.lastChild.children[0].value)
-	console.log(contenedor.children)
 verifyVisibility = (entries, entry) => {
 		if ((entries[0] != undefined) && entries[0].isIntersecting === true) {
 			var array = [];
@@ -194,7 +192,6 @@ verifyVisibility = (entries, entry) => {
 			}
 			
 			var number = (entries[0].target.firstElementChild.attributes[1].value)
-			console.log(array.includes(contenedor.children.length))
 			MorePokemons(number)
 		}
 }
@@ -211,12 +208,6 @@ function MorePokemons(e) {
 }
 
 
-class pokeItem{
-	constructor(element,id){
-		this.element = element;
-		this.id = id;
-	}
-}
 let allButtons = []
 const printLittleCard = (pokemon) =>{
 	page.innerHTML +=	 `
@@ -327,10 +318,6 @@ function exit(){
 function section1(){
 	page.innerHTML = "";
 	PokemonChico(1,20)
-	buttons.forEach(e=>{
-		e.classList.remove("active")
-	})
-	button1.classList.add("active")
 }
 
 
@@ -364,12 +351,10 @@ async function PokemonChicoFiltroNuevo(filtro, empezar, terminar){
 				printLittleCard(pokemon)
 			} 
 			var contenedor = document.querySelector("#container")
-			console.log(contenedor.children.length)
 
 			if (contenedor.children.length >= terminar ) {
 				break;
 			}
-			console.log(terminar)
 	}
 	catch (error){
 		console.log(error)
@@ -384,7 +369,6 @@ body.removeChild(spinner)
 	var inputName = document.getElementById("searchNameInput")
 	inputName.disabled = false;
 	var contenedor = document.querySelector("#container");
-	console.log(contenedor.children)
 	verifyVisibility = (entries, entry) => {
 		if ((entries[0] != undefined) && entries[0].isIntersecting === true) {
 
@@ -428,7 +412,6 @@ function verificatorFunction(e){
 		} else{
 			secondValidator = false
 		}
-		console.log(verificator)
 
 	}
 	return secondValidator
@@ -526,6 +509,7 @@ inputTypeContainer.addEventListener("change", function prueba123(){
 		nameValidator3 = pattern.exec(inputName.value)
 
 	if (nameValidator2 === false && nameValidator3 != null) {
+		page.innerHTML = ""
 		PokemonNameFiltrer(inputName.value, 1, 700)
 	} else if(nameValidator2 === true){
 			var containerElement = document.querySelector(".search-name-container")
