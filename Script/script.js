@@ -500,7 +500,7 @@ function displayNone(){
 	boxAlert.style.display = "none"
 }
 	
-inputTypeContainer.addEventListener("change", function prueba123(){
+inputTypeContainer.addEventListener("change", function search(){
 		var inputName = document.getElementById("searchNameInput")
 		
 		// VALIDATIONS
@@ -536,8 +536,8 @@ function resolveBug(){
 	})
 }
 
-let pruebaEvent = document.querySelectorAll(".type-item")
-pruebaEvent.forEach(e=>{
+let typeItem = document.querySelectorAll(".type-item")
+typeItem.forEach(e=>{
 		e.addEventListener("click", function event(){
 				page.innerHTML = "";
 				verificatorFunction("clean")
